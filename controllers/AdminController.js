@@ -104,7 +104,7 @@ const forgotPassword = async (req, res) => {
     await admin.save({ validateBeforeSave: false })
 
     const passwordUrl = `${req.protocol}://${req.get('host')}/reset/${resetToken}`
-    const message = `Parolynyzy tazelemek ucin gerekli token: ${passwordUrl}`
+    const message = `New Password token: ${passwordUrl}`
 
     try {
         const transporter = nodemailer.createTransport({
@@ -112,16 +112,16 @@ const forgotPassword = async (req, res) => {
             service: "gmail",
             host: "smpt.gmail.com",
             auth: {
-                user: 'mammetbaymammetbayew@gmail.com',
-                pass: 'Kakajan2020@', // proyekt un yorite gmail akkaunt ac!!!
+                user: 'example@email.com', // email
+                pass: 'ExamplePassword', // password
             },
             secure: true,
         })
 
         const mailData = {
-            from: 'mammetbaymammetbayew@gmail.com',
+            from: 'example@email.com',
             to: req.body.email,
-            subject: 'Parol tazelemek',
+            subject: 'New password token',
             text: message,
         }
 
